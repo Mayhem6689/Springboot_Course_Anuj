@@ -1,5 +1,6 @@
 package com.codingshuttle.youtube.InternalWorkingOfSpringBoot;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,28 +9,31 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //instead of using the main method for running the CLI Commands, we use the Command Line runner interface to abstract main.
 public class InternalWorkingOfSpringBootApplication implements CommandLineRunner {
 
-	public static void main(String[] args) {
-		SpringApplication.run(InternalWorkingOfSpringBootApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(InternalWorkingOfSpringBootApplication.class, args);
+    }
+/*
+// Called "Constructor Dependency Injection" (most recommended method, explicitly states which bean is to be used as dependency)
 //for beans way 1 is to create a constructer of the application class which takes an object of the bean as an input
-	InternalWorkingOfSpringBootApplication(razorpayPaymentService paymentService){
-		this.paymentService = paymentService;
-	}
+    InternalWorkingOfSpringBootApplication(razorpayPaymentService paymentService) {
+        this.paymentService = paymentService;
+    }
+    private razorpayPaymentService paymentService; //private final can be used to make the object uneditable in the future or in runtime or during compiletime
+*/
+
+	//WAY 2: Second method to inject dependency is to use the @autowired annotation (most commonly used)
+	@Autowired
 	private razorpayPaymentService paymentService;
 
-
-
-
 // This declaration is for standard classes
-//	private razorpayPaymentService paymentService=new razorpayPaymentService(); declaration of paymentService object
+// private razorpayPaymentService paymentService=new razorpayPaymentService(); declaration of paymentService object
 // This method will run after everything is already completed (ie at the end)
-	// we can use non static methods in this interface's object as it is not declared as a static.
-	@Override
-	public void run(String... args) throws Exception {
-	String payment = paymentService.pay();
-	System.out.println("Payment Done: "+payment);
-	}
+    // we can use non static methods in this interface's object as it is not declared as a static.
+    @Override
+    public void run(String... args) throws Exception {
+        String payment = paymentService.pay();
+        System.out.println("Payment Done: " + payment);
+    }
 }
 //runs at end of log file printed in terminal after running
 // tightly coupled because every time when we'll use other classes, we'll need to declare them seperately which is not what is needed
