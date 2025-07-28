@@ -12,8 +12,17 @@ public class InternalWorkingOfSpringBootApplication implements CommandLineRunner
 		SpringApplication.run(InternalWorkingOfSpringBootApplication.class, args);
 	}
 
+//for beans way 1 is to create a constructer of the application class which takes an object of the bean as an input
+	InternalWorkingOfSpringBootApplication(razorpayPaymentService paymentService){
+		this.paymentService = paymentService;
+	}
+	private razorpayPaymentService paymentService;
 
-	private razorpayPaymentService paymentService=new razorpayPaymentService();// declaration of paymentService object
+
+
+
+// This declaration is for standard classes
+//	private razorpayPaymentService paymentService=new razorpayPaymentService(); declaration of paymentService object
 // This method will run after everything is already completed (ie at the end)
 	// we can use non static methods in this interface's object as it is not declared as a static.
 	@Override
