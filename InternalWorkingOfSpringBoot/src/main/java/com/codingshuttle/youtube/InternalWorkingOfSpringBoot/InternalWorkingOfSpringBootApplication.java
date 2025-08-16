@@ -17,7 +17,7 @@ public class InternalWorkingOfSpringBootApplication implements CommandLineRunner
 	We have created a interface (PaymentService) for multiple beans (multiple payment methods) and autowired (injected) them in the application
 	Now this constructor call will give error {InternalWorkingOfSpringBootApplication(PaymentService paymentService)}
 	because instead of 1 bean, 2 beans were found which conflict each other
-	how can we setup which bean to be selected automatically?
+	how can we set, which bean to be selected automatically?
 	--> we add a conditional service in application.properties in src/main/resources
 	and then use @ConditionalOnProperty annotation in the beans to fulfill a particular condition defined in application.properties
 
